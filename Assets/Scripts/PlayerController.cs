@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
     private BoxCollider2D _bc;
+    private Animator _anim;
     private float _xDir;
     private int _score;
 
@@ -30,6 +31,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.velocity = new Vector2(_xDir * 10f, _rb.velocity.y);
+        if (_rb.velocity.x == 0f)
+        {
+            _anim.SetBool("Walking", false);
+        }
+        else
+        {
+            _anim.SetBool("Walking", true);
+        }
         if (_rb.velocity.x > 0f)
         {
             _sr.flipX = true;
