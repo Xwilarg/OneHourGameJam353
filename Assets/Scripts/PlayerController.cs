@@ -6,12 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
+    private BoxCollider2D _bc;
     float _xDir;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
+        _bc = GetComponent<BoxCollider2D>();
         SetTargetColor();
     }
 
@@ -32,7 +34,8 @@ public class PlayerController : MonoBehaviour
             var shape = collision.collider.GetComponent<ShapeInfo>();
             if (shape.MyColor != _targetColor)
             {
-                Destroy(gameObject);
+                _sr.enabled = false;
+                _bc.enabled = false;
                 StartCoroutine(WaitAndRestart());
             }
             else
@@ -50,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator WaitAndRestart()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(0);
     }
 
     private void SetTargetColor()
