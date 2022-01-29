@@ -32,11 +32,11 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = new Vector2(_xDir * 10f, _rb.velocity.y);
         if (_rb.velocity.x > 0f)
         {
-            _sr.flipX = false;
+            _sr.flipX = true;
         }
         else if (_rb.velocity.x < 0f)
         {
-            _sr.flipX = true;
+            _sr.flipX = false;
         }
     }
 
