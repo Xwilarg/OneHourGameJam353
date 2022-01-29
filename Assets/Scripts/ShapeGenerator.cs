@@ -3,11 +3,28 @@ using UnityEngine;
 
 public class ShapeGenerator : MonoBehaviour
 {
+    public static ShapeGenerator S;
+
+    private void Awake()
+    {
+        S = this;
+    }
+
     [SerializeField]
     private GameObject[] _prefabs;
 
     [SerializeField]
-    private int _xBound, _waitTime;
+    private int _xBound;
+
+    private float _waitTime = 1f;
+
+    public void ReduceWaitTime()
+    {
+        if (_waitTime > .5f)
+        {
+            _waitTime -= .5f;
+        }
+    }
 
     private void Start()
     {

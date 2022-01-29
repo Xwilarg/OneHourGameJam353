@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
                 }
                 _score++;
                 _scoreText.text = $"Score: {_score}";
+                ShapeGenerator.S.ReduceWaitTime();
             }
         }
     }
