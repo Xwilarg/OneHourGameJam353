@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
         _bc = GetComponent<BoxCollider2D>();
+        _anim = GetComponent<Animator>();
         SetTargetColor();
     }
 
