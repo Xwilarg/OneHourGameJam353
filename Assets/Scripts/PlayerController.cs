@@ -30,6 +30,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.velocity = new Vector2(_xDir * 10f, _rb.velocity.y);
+        if (_rb.velocity.x > 0f)
+        {
+            _sr.flipX = false;
+        }
+        else if (_rb.velocity.x < 0f)
+        {
+            _sr.flipX = true;
+        }
     }
 
     private void Update()
