@@ -21,7 +21,7 @@ public class ShapeGenerator : MonoBehaviour
     {
         while (_nbGenerated > 0)
         {
-            Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], new Vector2(Random.Range(-_xBound, _xBound), transform.position.y), Quaternion.identity);
+            Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], new Vector2(Random.Range(-_xBound, _xBound), transform.position.y), Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
             yield return new WaitForSeconds(_waitTime);
             _nbGenerated--;
         }
