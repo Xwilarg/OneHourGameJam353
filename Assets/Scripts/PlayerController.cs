@@ -1,13 +1,23 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private TMP_Text _scoreText;
+
+    [SerializeField]
+    private SpriteRenderer[] _addColors;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
     private BoxCollider2D _bc;
-    float _xDir;
+    private float _xDir;
+    private int _score;
+
+    private Color _oldcolor;
 
     private void Start()
     {
@@ -41,11 +51,14 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Destroy(collision.collider.gameObject);
+                _sr.color = _oldcolor;
                 var orColor = _targetColor;
                 while (orColor == _targetColor)
                 {
                     SetTargetColor();
                 }
+                _score++;
+                _scoreText.text = $"Score: {_score}";
             }
         }
     }
@@ -59,10 +72,16 @@ public class PlayerController : MonoBehaviour
     private void SetTargetColor()
     {
         _targetColor = (ShapeInfo.ShapeColor)Random.Range(0, 4);
-        if (_targetColor == ShapeInfo.ShapeColor.Red) _sr.color = Color.red;
-        else if (_targetColor == ShapeInfo.ShapeColor.Blue) _sr.color = Color.blue;
-        else if (_targetColor == ShapeInfo.ShapeColor.Green) _sr.color = Color.green;
-        else _sr.color = Color.yellow;
+        Color c;
+        if (_targetColor == ShapeInfo.ShapeColor.Red) c = Color.red;
+        else if (_targetColor == ShapeInfo.ShapeColor.Blue) c = Color.blue;
+        else if (_targetColor == ShapeInfo.ShapeColor.Green) c = Color.green;
+        else c = Color.yellow;
+        foreach (var o in _addColors)
+        {
+            o.color = c;
+        }
+        _oldcolor = c;
     }
 
     private ShapeInfo.ShapeColor _targetColor;
